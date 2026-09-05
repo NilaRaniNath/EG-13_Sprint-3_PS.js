@@ -71,24 +71,49 @@
 
 // 04. Ransom Note
 
+// /**
+//  * @param {string} ransomNote
+//  * @param {string} magazine
+//  * @return {boolean}
+//  */
+// var canConstruct = function(ransomNote, magazine) {
+//     const count = {};
+//     for (let char of magazine) {
+//         count[char] = (count[char] || 0) + 1;
+//     }
+    
+//     for (let char of ransomNote) {
+//         if (!count[char] || count[char] === 0) {
+//             return false;
+//         }
+//         count[char]--;
+//     }
+    
+//     return true;
+// };
+// console.log(" Ransom Note:", canConstruct("aa", "aab"));
+
+
+
+
+// 05. Majority Element
+
 /**
- * @param {string} ransomNote
- * @param {string} magazine
- * @return {boolean}
+ * @param {number[]} nums
+ * @return {number}
  */
-var canConstruct = function(ransomNote, magazine) {
-    const count = {};
-    for (let char of magazine) {
-        count[char] = (count[char] || 0) + 1;
-    }
+var majorityElement = function(nums) {
+    let candidate = null;
+    let count = 0;
     
-    for (let char of ransomNote) {
-        if (!count[char] || count[char] === 0) {
-            return false;
+    for (let num of nums) {
+        if (count === 0) {
+            candidate = num;
         }
-        count[char]--;
+        count += (num === candidate) ? 1 : -1;
     }
     
-    return true;
+    return candidate;
 };
-console.log(" Ransom Note:", canConstruct("aa", "aab"));
+
+console.log("Majority Element:", majorityElement([2, 2, 1, 1, 1, 2, 2]));
