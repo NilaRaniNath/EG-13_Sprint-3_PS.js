@@ -43,24 +43,52 @@
 
 // 03. Valid Anagram
 
+// /**
+//  * @param {string} s
+//  * @param {string} t
+//  * @return {boolean}
+//  */
+// var isAnagram = function(s, t) {
+//     if (s.length !== t.length) return false;
+    
+//     const count = {};
+//     for (let char of s) {
+//         count[char] = (count[char] || 0) + 1;
+//     }
+    
+//     for (let char of t) {
+//         if (!count[char]) return false;
+//         count[char]--;
+//     }
+    
+//     return true;
+// };
+// console.log("Valid Anagram:", isAnagram("anagram", "nagaram"));
+
+
+
+
+
+// 04. Ransom Note
+
 /**
- * @param {string} s
- * @param {string} t
+ * @param {string} ransomNote
+ * @param {string} magazine
  * @return {boolean}
  */
-var isAnagram = function(s, t) {
-    if (s.length !== t.length) return false;
-    
+var canConstruct = function(ransomNote, magazine) {
     const count = {};
-    for (let char of s) {
+    for (let char of magazine) {
         count[char] = (count[char] || 0) + 1;
     }
     
-    for (let char of t) {
-        if (!count[char]) return false;
+    for (let char of ransomNote) {
+        if (!count[char] || count[char] === 0) {
+            return false;
+        }
         count[char]--;
     }
     
     return true;
 };
-console.log("Valid Anagram:", isAnagram("anagram", "nagaram"));
+console.log(" Ransom Note:", canConstruct("aa", "aab"));
