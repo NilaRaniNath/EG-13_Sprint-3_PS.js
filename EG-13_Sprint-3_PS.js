@@ -120,26 +120,56 @@
 
 
 
-
-// 08. Top K Frequent Elements
+// 07. Subarray Sum Equals K
 
 /**
  * @param {number[]} nums
  * @param {number} k
- * @return {number[]}
+ * @return {number}
  */
-var topKFrequent = function(nums, k) {
+var subarraySum = function(nums, k) {
+    let count = 0;
+    let sum = 0;
     const map = new Map();
+    map.set(0, 1);
+    
     for (let num of nums) {
-        map.set(num, (map.get(num) || 0) + 1);
+        sum += num;
+        if (map.has(sum - k)) {
+            count += map.get(sum - k);
+        }
+        map.set(sum, (map.get(sum) || 0) + 1);
     }
     
-    return Array.from(map.keys())
-        .sort((a, b) => map.get(b) - map.get(a))
-        .slice(0, k);
+    return count;
 };
+// console.log("Subarray Sum Equals K:", subarraySum([1, 1, 1], 2));
 
-console.log("Top K Frequent Elements:", topKFrequent([1, 1, 1, 2, 2, 3], 2));
+
+
+
+
+
+
+// 08. Top K Frequent Elements
+
+// /**
+//  * @param {number[]} nums
+//  * @param {number} k
+//  * @return {number[]}
+//  */
+// var topKFrequent = function(nums, k) {
+//     const map = new Map();
+//     for (let num of nums) {
+//         map.set(num, (map.get(num) || 0) + 1);
+//     }
+    
+//     return Array.from(map.keys())
+//         .sort((a, b) => map.get(b) - map.get(a))
+//         .slice(0, k);
+// };
+
+// console.log("Top K Frequent Elements:", topKFrequent([1, 1, 1, 2, 2, 3], 2));
 
 
 
