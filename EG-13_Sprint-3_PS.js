@@ -121,31 +121,65 @@ var majorityElement = function(nums) {
 
 
 
-// 10. Sort Colors
 
+// 09. Longest Consecutive Sequence
 /**
  * @param {number[]} nums
- * @return {void} Do not return anything, modify nums in-place instead.
+ * @return {number}
  */
-var sortColors = function(nums) {
-    let low = 0;
-    let mid = 0;
-    let high = nums.length - 1;
+var longestConsecutive = function(nums) {
+    if (nums.length === 0) return 0;
     
-    while (mid <= high) {
-        if (nums[mid] === 0) {
-            [nums[low], nums[mid]] = [nums[mid], nums[low]];
-            low++;
-            mid++;
-        } else if (nums[mid] === 1) {
-            mid++;
-        } else {
-            [nums[mid], nums[high]] = [nums[high], nums[mid]];
-            high--;
+    const set = new Set(nums);
+    let longest = 0;
+    
+    for (let num of set) {
+        if (!set.has(num - 1)) {
+            let currentNum = num;
+            let currentStreak = 1;
+            
+            while (set.has(currentNum + 1)) {
+                currentNum++;
+                currentStreak++;
+            }
+            
+            longest = Math.max(longest, currentStreak);
         }
     }
+    
+    return longest;
 };
+console.log("Longest Consecutive Sequence:", longestConsecutive([100, 4, 200, 1, 3, 2]));
 
-let nums10 = [2, 0, 2, 1, 1, 0];
-sortColors(nums10);
-console.log("Sort Colors:", nums10);
+
+
+
+
+// 10. Sort Colors
+
+// /**
+//  * @param {number[]} nums
+//  * @return {void} Do not return anything, modify nums in-place instead.
+//  */
+// var sortColors = function(nums) {
+//     let low = 0;
+//     let mid = 0;
+//     let high = nums.length - 1;
+    
+//     while (mid <= high) {
+//         if (nums[mid] === 0) {
+//             [nums[low], nums[mid]] = [nums[mid], nums[low]];
+//             low++;
+//             mid++;
+//         } else if (nums[mid] === 1) {
+//             mid++;
+//         } else {
+//             [nums[mid], nums[high]] = [nums[high], nums[mid]];
+//             high--;
+//         }
+//     }
+// };
+
+// let nums10 = [2, 0, 2, 1, 1, 0];
+// sortColors(nums10);
+// console.log("Sort Colors:", nums10);
