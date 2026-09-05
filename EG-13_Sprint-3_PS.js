@@ -120,29 +120,71 @@
 
 
 
-// 07. Subarray Sum Equals K
+
+// 06. 3Sum
 
 /**
  * @param {number[]} nums
- * @param {number} k
- * @return {number}
+ * @return {number[][]}
  */
-var subarraySum = function(nums, k) {
-    let count = 0;
-    let sum = 0;
-    const map = new Map();
-    map.set(0, 1);
+var threeSum = function(nums) {
+    nums.sort((a, b) => a - b);
+    const result = [];
     
-    for (let num of nums) {
-        sum += num;
-        if (map.has(sum - k)) {
-            count += map.get(sum - k);
+    for (let i = 0; i < nums.length - 2; i++) {
+        if (i > 0 && nums[i] === nums[i - 1]) continue;
+        
+        let left = i + 1;
+        let right = nums.length - 1;
+        
+        while (left < right) {
+            const sum = nums[i] + nums[left] + nums[right];
+            
+            if (sum === 0) {
+                result.push([nums[i], nums[left], nums[right]]);
+                while (left < right && nums[left] === nums[left + 1]) left++;
+                while (left < right && nums[right] === nums[right - 1]) right--;
+                left++;
+                right--;
+            } else if (sum < 0) {
+                left++;
+            } else {
+                right--;
+            }
         }
-        map.set(sum, (map.get(sum) || 0) + 1);
     }
     
-    return count;
+    return result;
 };
+console.log("3Sum:", threeSum([-1, 0, 1, 2, -1, -4]));
+
+
+
+
+
+// 07. Subarray Sum Equals K
+
+// /**
+//  * @param {number[]} nums
+//  * @param {number} k
+//  * @return {number}
+//  */
+// var subarraySum = function(nums, k) {
+//     let count = 0;
+//     let sum = 0;
+//     const map = new Map();
+//     map.set(0, 1);
+    
+//     for (let num of nums) {
+//         sum += num;
+//         if (map.has(sum - k)) {
+//             count += map.get(sum - k);
+//         }
+//         map.set(sum, (map.get(sum) || 0) + 1);
+//     }
+    
+//     return count;
+// };
 // console.log("Subarray Sum Equals K:", subarraySum([1, 1, 1], 2));
 
 
